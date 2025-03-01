@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
 import React from 'react';
 import ScreenWrapper from '../components/ScreenWrapper';
-import { wp } from '../helpers/common';
+import { hp,wp } from '../helpers/common';
 import { StatusBar } from 'expo-status-bar';
+import {theme} from '../constants/theme'
 
 const welcome = () => {
   return (
@@ -10,7 +11,16 @@ const welcome = () => {
       <StatusBar style="dark" />
       <View style={styles.container}>
         {/* Welcome image */}
-        <Image style={styles.welcomeImage} source={require('../assets/images/welcome.png')} />
+        <Image style={styles.welcomeImage} resizeMode='contain' source={require('../assets/images/welcome.png')} />
+      {/*title*/}
+      <View style={{gap:20}}>
+        <Text style={styles.title}>LinkUp!</Text>
+        <Text style={styles.punchline}>
+          Where every thought finds a home aand every image tells a story.
+        </Text>
+
+      </View>
+
       </View>
     </ScreenWrapper>
   );
@@ -26,4 +36,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: wp(4),
   },
+  welcomeImage : {
+    height: hp(30),
+    width: wp(100),
+    alignSelf: 'center',
+  },
+  title: {
+    color: theme.colors.text,
+    fontSize: hp(4),
+    textAlign:'center',
+    fontWeight: theme.fonts.extraBold
+  }
 });
