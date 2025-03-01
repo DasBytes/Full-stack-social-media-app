@@ -62,5 +62,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp(10),
     fontSize: hp(1.7),
     color: theme.colors.text
+  },
+  footer : {
+    gap: 30,
+    width: '100%'
   }
 });
