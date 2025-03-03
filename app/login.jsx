@@ -4,12 +4,18 @@ import ScreenWrapper from '../components/ScreenWrapper'
 import Home from '../assets/icons/Home'
 import { theme } from '../constants/theme'
 import Icon from '../assets/icons'
+import { StatusBar } from 'expo-status-bar'
+import BackButton from '../components/BackButton'
+import { useRouter } from 'expo-router'
 
 const Login = () => {
+  const router= useRouter();
   return (
     <ScreenWrapper>
-      <Text>Login</Text>
-     <Icon name="home" color="red"/>
+     <StatusBar  style="dark"/>
+    <View style={styles.container}>
+      <BackButton router={router} />
+      </View> 
     </ScreenWrapper>
   )
 }
