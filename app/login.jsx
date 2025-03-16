@@ -1,18 +1,28 @@
-import { StyleSheet, Text, View, TextInput } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, TextInput, Pressable } from 'react-native'
+import React, { useState, useRef } from 'react'
 import ScreenWrapper from '../components/ScreenWrapper'
 import { StatusBar } from 'expo-status-bar'
 import BackButton from '../components/BackButton'
 import { useRouter } from 'expo-router'
 import { hp, wp } from '../helpers/common'
 import { theme } from '../constants/theme'
-import Input from '../components/input'
-import Icon from '../assets/icons'
+import Button from '../components/Button';
+import Input from '../components/input';
+import Icon from '../assets/icons';
+
 
 const Login = () => {
   const router = useRouter();
+  const emailRef = useRef("");
+  const passwordRef = useRef("");
+  const [loading, setLoading] = useState(false)
+
+  const onSubmit = () => {
+
+  }
+
   return (
-    <ScreenWrapper>
+    <ScreenWrapper bg="white">
       <StatusBar style="dark" />
       <View style={styles.container}>
         <BackButton />
@@ -28,11 +38,36 @@ const Login = () => {
           <Text style={{ fontSize: hp(1.5), color: theme.colors.text }}>
             Please login to continue
           </Text>
-          <Input icon={<Icon name="mail" size={26} strokeWidth={1.6}/>}
-            placeholder ='Enter your Email'
-            onChangeText={value=>{}}
+
+          <Input
+            icon={<Icon name="mail" size={26} strokeWidth={1.6} />}
+            placeholder='Enter your Email'
+            onChangeText={value => emailRef.current = value}
           />
 
+          <Input
+            icon={<Icon name="lock" size={26} strokeWidth={1.6} />}
+            placeholder='Enter your Password'
+            secureTextEntry
+            onChangeText={value => passwordRef.current = value} // ✅ FIXED: should be passwordRef
+          />
+
+          <Text style={styles.forgotPassword}>
+            Forgot password?
+          </Text>
+
+          {/* Button */}
+          <Button title={'Login'} loading={loading} onPress={onSubmit} />
+
+          {/* Footer */}
+          <View style={styles.footer}>
+            <Text style={styles.footerText}>
+              Don't have an account?
+            </Text>
+            <Pressable>
+              <Text style={[styles.footerText, { color: theme.colors.primaryDark, fontWeight: theme.fonts.semiBold }]}>Sign up</Text>
+            </Pressable>
+          </View>
 
         </View>
       </View>
