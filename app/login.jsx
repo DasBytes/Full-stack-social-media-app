@@ -6,6 +6,8 @@ import BackButton from '../components/BackButton'
 import { useRouter } from 'expo-router'
 import { hp, wp } from '../helpers/common'
 import { theme } from '../constants/theme'
+import Input from '../components/input'
+import Icon from '../assets/icons'
 
 const Login = () => {
   const router = useRouter();
@@ -26,7 +28,11 @@ const Login = () => {
           <Text style={{ fontSize: hp(1.5), color: theme.colors.text }}>
             Please login to continue
           </Text>
-          <TextInput />
+          <Input icon={<Icon name="mail" size={26} strokeWidth={1.6}/>}
+            placeholder ='Enter your Email'
+            onChangeText={value=>{}}
+          />
+
 
         </View>
       </View>
