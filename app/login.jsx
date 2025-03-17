@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Pressable } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Pressable, Alert } from 'react-native'
 import React, { useState, useRef } from 'react'
 import ScreenWrapper from '../components/ScreenWrapper'
 import { StatusBar } from 'expo-status-bar'
@@ -17,7 +17,13 @@ const Login = () => {
   const passwordRef = useRef("");
   const [loading, setLoading] = useState(false)
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
+    if(!emailRef.current || !passwordRef.current)
+    {
+      Alert.alert('Login',"Please fill all the fields");
+      return;
+    }
+    // good to go
 
   }
 
