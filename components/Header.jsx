@@ -5,7 +5,7 @@ import BackButton from './BackButton';
 import { theme } from '../constants/theme';
 import { hp } from '../helpers/common';
 
-const Header = ({ title, showBackButton = false, mb = 10 }) => {
+const Header = ({ title, showBackButton = true, mb = 10 }) => {
 
     const router = useRouter();
   return (

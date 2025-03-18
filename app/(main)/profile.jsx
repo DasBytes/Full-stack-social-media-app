@@ -9,6 +9,7 @@ import Icon from '../../assets/icons'
 import { theme } from '../../constants/theme'
 import { supabase } from '../../lib/superbase'
 import Avatar from '../../components/Avatar'
+import { use } from 'react'
 
 const Profile = () => {
     const {user, setAuth} = useAuth();
@@ -48,7 +49,7 @@ const UserHeader = ({user, router,handleLogout}) => {
     return (
         <View style= {{flex:1, backgroundColor: "white", paddingHorizontal: wp(4)}}>
       <View >
-        <Header title="profile"  showBackButton={true}/>
+        <Header title="profile" mb={30}/>
         <TouchableOpacity style= {styles.logoutButton} onPress={handleLogout}>
             <Icon name="logout" color = {theme.colors.rose} />
         </TouchableOpacity>
@@ -65,7 +66,23 @@ const UserHeader = ({user, router,handleLogout}) => {
                 <Icon name="edit" strokewidth ={2.5} size = {20} />
             </Pressable>
             </View>
-           
+           {/* username and address */}
+           <View style={{alignItems: 'center', gap: 4}}>
+            <Text style={styles.userName}>
+              {user && user.name}
+            </Text>
+            <Text style={styles.infoText}>
+              Chattagram
+            </Text>
+           </View>
+           {/* email , phone, bio */}
+           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+  <Icon name="mail" size={20} color={theme.colors.textLight} />
+  <Text style={styles.infoText}>
+    {user?.email || "No email available"}
+  </Text>
+</View>
+
          </View>
       </View>
         </View>
