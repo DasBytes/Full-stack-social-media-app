@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { Stack, useRouter } from 'expo-router'
 import { AuthProvider, useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/superbase'
+import { getUserData } from '../services/userService'
 
 
 const _layout = () => {
@@ -14,7 +15,7 @@ const _layout = () => {
 }
 
 const MainLayout = () => {
-  const {setAuth} =useAuth();
+  const {setAuth, setUserData} =useAuth();
   const router = useRouter();
 
    useEffect(()=> {
@@ -34,7 +35,10 @@ const MainLayout = () => {
    },[]);
 
    const updateUserData = async (user)=> {
-    
+    let res= await getUserData(user?.id);
+    if(res.success) setUserData(res.data);
+  
+
    }
   return (
        <Stack
