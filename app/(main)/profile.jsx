@@ -76,12 +76,31 @@ const UserHeader = ({user, router,handleLogout}) => {
             </Text>
            </View>
            {/* email , phone, bio */}
-           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+           <View style={styles.info}>
   <Icon name="mail" size={20} color={theme.colors.textLight} />
   <Text style={styles.infoText}>
-    {user?.email || "No email available"}
+    { user && user?.email}
   </Text>
 </View>
+
+
+{
+  user && user.phoneNumber && (
+    <View style={styles.info}>
+    <Icon name="call" size={20} color={theme.colors.textLight} />
+    <Text style={styles.infoText}>
+      { user && user?.phoneNumber}
+    </Text>
+  </View>
+  )
+}
+
+{
+  user && user.bio && (
+    <Text style={styles.infoText}>{user.bio}</Text>
+  )
+}
+
 
          </View>
       </View>
@@ -115,7 +134,8 @@ const styles = StyleSheet.create({
     },
     info : {
         alignItems: 'center',
-        gap: 10
+        gap: 10,
+        flexDirection: 'row',
     },
     userName : {
         fontSize: hp(3),
