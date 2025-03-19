@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View ,Image, Pressable} from 'react-native'
+import { ScrollView, StyleSheet, Text, View ,Image, Pressable, Alert} from 'react-native'
 import React, { useEffect } from 'react'
 import ScreenWrapper from '../../components/ScreenWrapper'
 import { hp, wp } from '../../helpers/common'
@@ -8,11 +8,16 @@ import { useAuth } from '../../context/AuthContext'
 import { getUserImageSrc } from '../../services/imageService'
 import Icon from '../../assets/icons'
 import { useState } from 'react'
-import Input from '../../components/input'
+import Input from '../../components/Input'
+import Button from '../../components/Button'
+import { updateUser } from '../../services/userService'
+import { router, useRouter } from 'expo-router'
 
 
 const EditProfile = () => {
-    const {user: currentUser} = useAuth();
+    const {user: currentUser, setUserData} = useAuth();
+    const [loading, setLoading] = useState (false);
+    const router= useRouter();
 
    const [user, setUser] = useState ({
     name : '',
@@ -36,6 +41,26 @@ const EditProfile = () => {
    },[currentUser])
     const onPickImage = async() => {
 
+    }
+
+    const onSubmit = async () => {
+      let userData = {...user};
+      let {name, phoneNumber, address, bio} = userData ;
+      if(!name || !phoneNumber || !address || !bio) {
+        Alert.alert('Profile',"Please fill all the fields");
+        return;
+      }
+      setLoading(true);
+
+      // update user
+
+      const res = await updateUser(currentUser?.id, userData);
+      setLoading(false);
+      
+      if(res.success) {
+        setUserData({...currentUser, ...userData});
+        router.back();
+      }
     }
     
     let imageSource = getUserImageSrc(user.image);
@@ -62,6 +87,30 @@ const EditProfile = () => {
                 value ={user.name}
                 onChangeText = {value=> setUser({...user, name: value})}
                 />
+
+              <Input 
+                icon = {<Icon name="call" /> }
+                placeholder = 'Enter your phone number'
+                value ={user.phoneNumber}
+                onChangeText = {value=> setUser({...user, phoneNumber: value})}
+                />
+
+               <Input 
+                icon = {<Icon name="location" /> }
+                placeholder = 'Enter your address'
+                value ={user.address}
+                onChangeText = {value=> setUser({...user, address: value})}
+                />
+                <Input 
+          
+                placeholder = 'Enter your bio'
+                value ={user.bio}
+                multiline= {true}
+                containerStyle= {styles.bio}
+                onChangeText = {value=> setUser({...user, bio: value})}
+                />
+
+                <Button title="update" loading={loading} onPress={onSubmit} />
             </View>
         </ScrollView>
       </View>

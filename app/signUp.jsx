@@ -7,7 +7,7 @@ import { useRouter } from 'expo-router'
 import { hp, wp } from '../helpers/common'
 import { theme } from '../constants/theme'
 import  Button  from '../components/Button';
-import Input from '../components/input';
+import Input from '../components/Input';
 import Icon from '../assets/icons';
 import { supabase } from '../lib/superbase'
 
