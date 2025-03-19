@@ -1,17 +1,16 @@
-import { ScrollView, StyleSheet, Text, View ,Image, Pressable, Alert} from 'react-native'
-import React, { useEffect } from 'react'
-import ScreenWrapper from '../../components/ScreenWrapper'
-import { hp, wp } from '../../helpers/common'
-import { theme } from '../../constants/theme'
-import Header from '../../components/Header'
-import { useAuth } from '../../context/AuthContext'
-import { getUserImageSrc } from '../../services/imageService'
-import Icon from '../../assets/icons'
-import { useState } from 'react'
-import Input from '../../components/Input'
-import Button from '../../components/Button'
-import { updateUser } from '../../services/userService'
-import { router, useRouter } from 'expo-router'
+import { ScrollView, StyleSheet, Text, View, Image, Pressable, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import ScreenWrapper from '../../components/ScreenWrapper';
+import { hp, wp } from '../../helpers/common';
+import { theme } from '../../constants/theme';
+import Header from '../../components/Header';
+import { useAuth } from '../../context/AuthContext';
+import { getUserImageSrc } from '../../services/imageService';
+import Icon from '../../assets/icons';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import { updateUser } from '../../services/userService';
+import { useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 
 
@@ -45,38 +44,47 @@ const EditProfile = () => {
     const onPickImage = async() => {
 
       let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ['images'],
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [4, 3],
         quality: 0.7,
       });
 
       if (!result.canceled) {
-        setUser({...user, Image : result.assets[0]});
+        setUser({...user, image : result.assets[0]});
       }
     }
 
     const onSubmit = async () => {
-      let userData = {...user};
-      let {name, phoneNumber, address, bio} = userData ;
-      if(!name || !phoneNumber || !address || !bio) {
-        Alert.alert('Profile',"Please fill all the fields");
+      let userData = { ...user };
+      let { name, phoneNumber, address, bio, image } = userData;
+      
+      if (!name || !phoneNumber || !address || !bio || !image) {
+        Alert.alert('Profile', "Please fill all the fields");
         return;
       }
+    
       setLoading(true);
-
-      // update user
-
+    
+      if (typeof image === 'object') {
+        // Upload image logic
+      }
+    
       const res = await updateUser(currentUser?.id, userData);
       setLoading(false);
-      
-      if(res.success) {
-        setUserData({...currentUser, ...userData});
+    
+      if (res.success) {
+        setUserData({ ...currentUser, ...userData });
         router.back();
       }
-    }
+    };
     
-    let imageSource = getUserImageSrc(user.image);
+   
+    let imageSource = user.image && typeof user.image === 'object'
+      ? { uri: user.image.uri }
+      : getUserImageSrc(user.image);
+    
+
   return (
     <ScreenWrapper bg="white">
       <View style={styles.container}>
@@ -87,7 +95,7 @@ const EditProfile = () => {
                 <View style={styles.avatarContainer}>
                    <Image source={imageSource} style={styles.avatar} /> 
                    <Pressable style={styles.cameraIcon}  onPress={onPickImage}>
-                    <Icon name="camera" size= {20} strokewidth={2.5} />
+                    <Icon name="camera" size= {20} strokeWidth={2.5} />
                    </Pressable>
                 </View>
                 <Text style={{fontSize: hp(1.5), color: theme.colors.text}}>
