@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Button, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useRef, useState } from 'react'
 import ScreenWrapper from '../../components/ScreenWrapper'
 import Header from '../../components/Header'
@@ -9,6 +9,7 @@ import Avatar from '../../components/Avatar'
 import RichTextEditor from '../../components/RichTextEditor'
 import { useRoute } from '@react-navigation/native'
 import { useRouter } from 'expo-router'
+import Icon from '../../assets/icons'
 
 const NewPost = () => {
   const {user} = useAuth();
@@ -18,7 +19,15 @@ const NewPost = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(file);
+
+  const onPick = async (isImage) => {
+
+  }
   
+
+  const onSubmit = async () => {
+
+  }
 
   return (
     <ScreenWrapper bg="white">
@@ -53,8 +62,28 @@ const NewPost = () => {
           <RichTextEditor editorRef= {editorRef} onChange= {body => bodyRef.current = body} />
         </View>
         
-        
+        <View style= {styles.media} >
+          <Text style= {styles.addImageText} >Add to your post</Text>
+          <View style= {styles.mediaIcons} >
+            <TouchableOpacity  onPress={() => onPick(true)}>
+              <Icon name="image" size= {30} color= {theme.colors.dark} />
+            </TouchableOpacity>
+
+
+            <TouchableOpacity  onPress={() => onPick(false)}>
+              <Icon name="video" size= {33} color= {theme.colors.dark} />
+            </TouchableOpacity>
+          </View>
+        </View>
+
       </ScrollView>
+      <Button 
+      buttonStyle= {{height: hp(6.2)}}
+      title= "post"
+      loading= {loading}
+      hasShadow = {false}
+      onPress={onSubmit}
+      />
    
       </View>
 
@@ -138,7 +167,7 @@ const styles = StyleSheet.create({
     textAlign : 'center',
     
   },
-      container: {
+ container: {
           flex: 1,
           paddingHorizontal: wp(4),
           // backgroundColor: 'red'
