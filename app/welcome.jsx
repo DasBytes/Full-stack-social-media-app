@@ -44,6 +44,18 @@ const welcome = () => {
          </View>
             
          </View>
+         <Text></Text>
+
+         {/* Bottom Texts - Design Credit & Copyright */}
+         <View style={styles.bottomSection}>
+          <Text style={styles.footerText}>
+            Designed & Developed by{' '}
+            <Text style={styles.highlightedText}>Pranta Das, Aniruddha Dev Nath, Abrar Jawad,</Text> and{' '}
+            <Text style={styles.highlightedText}>Anitya Barua.</Text>
+          </Text>
+          <Text></Text>
+          <Text style={styles.copyrightText}>© 2025 LinkUp. All rights reserved.</Text>
+        </View>
       </View>
     </ScreenWrapper>
   );
@@ -90,5 +102,28 @@ const styles = StyleSheet.create({
     textAlign:'center',
     color: theme.colors.text,
     fontSize: hp(1.6)
-  }
+  },
+  footerText: {
+    textAlign: 'center',
+    fontSize: hp(1.5),
+    color: '#555',
+    marginTop: 20,
+  },
+  bottomSection: {
+    position: 'absolute',
+    bottom: hp(3), // Ensure it's at the very bottom
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  highlightedText: {
+    fontWeight: 'bold',
+    color: theme.colors.primaryDark,
+  },
+  copyrightText: {
+    textAlign: 'center',
+    fontSize: hp(1.4),
+    color: '#777',
+  },
 });

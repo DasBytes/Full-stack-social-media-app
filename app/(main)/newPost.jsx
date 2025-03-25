@@ -23,6 +23,8 @@ const NewPost = () => {
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(file);
 
+   
+
   const onPick = async (isImage) => {
 
     let mediaConfig = {
@@ -45,10 +47,35 @@ const NewPost = () => {
 
   }
   
+   const isLocalFile = file => {
+      if(!file) return null;
+      if(typeof  file== 'object') return true;
 
+
+      return false;
+   }
+  const getFileType = file => {
+    if(!file)  return null;
+    
+    if(!isLocalFile(file)) {
+      return file.type;
+
+    }
+
+       
+    // check image or video for remote file
+
+    if(file.includes('PostImage'))
+    {
+      return 'image';
+    }
+    return 'video';
+  }
   const onSubmit = async () => {
 
   }
+
+ 
 
   return (
     <ScreenWrapper bg="white">
@@ -82,6 +109,21 @@ const NewPost = () => {
         <View style= {styles.textEditor} >
           <RichTextEditor editorRef= {editorRef} onChange= {body => bodyRef.current = body} />
         </View>
+
+        {
+          file && (
+            <View style={styles.file} > 
+            {
+              getFileType(file) == 'video'? (
+              <></>
+              ) : (
+              <></>
+              )
+            }
+
+            </View>
+          )
+        }
         
         <View style= {styles.media} >
           <Text style= {styles.addImageText} >Add to your post</Text>
