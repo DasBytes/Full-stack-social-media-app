@@ -10,6 +10,9 @@ import RichTextEditor from '../../components/RichTextEditor'
 import { useRoute } from '@react-navigation/native'
 import { useRouter } from 'expo-router'
 import Icon from '../../assets/icons'
+import * as ImagePicker from 'expo-image-picker';
+
+
 
 const NewPost = () => {
   const {user} = useAuth();
@@ -21,6 +24,24 @@ const NewPost = () => {
   const [file, setFile] = useState(file);
 
   const onPick = async (isImage) => {
+
+    let mediaConfig = {
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 0.7,
+    }
+    if(!isImage) {
+      mediaConfig = {
+       mediaTypes: ImagePicker.MediaTypeOptions.Videos,
+       allowsEditing : true
+      }
+    }
+         let result = await ImagePicker.launchImageLibraryAsync (mediaConfig);
+
+         if(!result.canceled) {
+          setFile(result.assets[0]);
+         }
 
   }
   
