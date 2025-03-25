@@ -1,13 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useRef } from 'react';
-import { actions, RichToolbar } from 'react-native-pell-rich-editor';
+import { actions, RichEditor, RichToolbar } from 'react-native-pell-rich-editor';
+import { theme } from '../constants/theme'
 
-const RichTextEditor = () => {
-  const editorRef = useRef(null); // Define editorRef as a reference to the editor
-  const onChange = (text) => {
-    // Handle the change (e.g., update state or perform actions)
-    console.log(text);
-  };
+
+
+const RichTextEditor = ( {
+   editorRef,
+   onChange 
+   }) => {
+
+   
+
 
   return (
     <View style={{ minHeight: 285 }}>
@@ -32,24 +36,56 @@ const RichTextEditor = () => {
         ]}
         iconMap = {{
           [actions.heading1] : ({tintColor}) => <Text style= {{color: tintColor}} >H1</Text>,
-          [actions.heading1] : ({tintColor}) => <Text style= {{color: tintColor}} >H4</Text>
+          [actions.heading4] : ({tintColor}) => <Text style= {{color: tintColor}} >H4</Text>
         }}
         style={styles.richBar}
-        flatContainerStyle={styles.listStyle}
+        flatContainerStyle={styles.flatStyle}
+        selectedIconTint = {theme.colors.primaryDark}
         editor={editorRef}
         disabled={false}
       />
+
+      <RichEditor
+      ref={editorRef}
+      containerStyle= {styles.rich}
+      editorStyle={styles.contentStyle}
+      placeholder= {"what's on your mind?"}
+      onChange = {onChange}
+ />
     </View>
   );
 };
+
+
 
 export default RichTextEditor;
 
 const styles = StyleSheet.create({
   richBar: {
-    // Define style for the RichToolbar
+    borderTopRightRadius: theme.radius.xl,
+    borderTopLeftRadius: theme.radius.xl,
+    backgroundColor : theme.colors.gray
+
   },
-  listStyle: {
-    // Define style for the list container
+  rich : {
+    minHeight: 240,
+    flex: 1,
+    borderWidth : 1.5,
+    borderTopWidth : 0,
+    borderBottomLeftRadius : theme.radius.xl,
+    borderBottomRightRadius: theme.colors.xl,
+    borderColor: theme.colors.gray,
+    padding: 5,
+
   },
+  contentStyle : {
+    color: theme.colors.text,
+    placeholder: 'gray',
+  },
+   flatStyle : {
+    paddingHorizontal: 8,
+    gap: 3,
+    
+   }
+
 });
