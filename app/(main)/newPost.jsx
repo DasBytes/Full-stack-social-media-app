@@ -11,6 +11,8 @@ import { useRoute } from '@react-navigation/native'
 import { useRouter } from 'expo-router'
 import Icon from '../../assets/icons'
 import * as ImagePicker from 'expo-image-picker';
+import Image from '../../assets/icons/Image'
+import { getSupabaseFilUrl } from '../../services/imageService'
 
 
 
@@ -71,9 +73,20 @@ const NewPost = () => {
     }
     return 'video';
   }
+
+  const getFileUri = file =>   {
+     if(!file) return null;
+     if(isLocalFile(file)) {
+      return file.uri;  
+     } 
+
+     return getSupabaseFilUrl(file)?.uri; 
+  }
   const onSubmit = async () => {
 
   }
+
+  console.log('file uri: ', getFileUri(file));
 
  
 
@@ -116,8 +129,9 @@ const NewPost = () => {
             {
               getFileType(file) == 'video'? (
               <></>
+                 
               ) : (
-              <></>
+              <Image source= {{uri: getFileUri(file)}}  resizeMode= 'cover' style={{flex: 1}} />
               )
             }
 
