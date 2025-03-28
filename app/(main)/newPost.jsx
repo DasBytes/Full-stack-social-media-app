@@ -1,4 +1,4 @@
-import { Button, ScrollView, StyleSheet, Text, TouchableOpacity, View,Image, Pressable } from 'react-native'
+import { Button, ScrollView, StyleSheet, Text, TouchableOpacity, View,Image, Pressable, Alert } from 'react-native'
 import React, { useRef, useState } from 'react'
 import ScreenWrapper from '../../components/ScreenWrapper'
 import Header from '../../components/Header'
@@ -84,8 +84,21 @@ const NewPost = () => {
      return getSupabaseFilUrl(file)?.uri; 
   }
   const onSubmit = async () => {
-      console.log('body: ', bodyRef.current)
-      console.log('file: ', file)
+       if(!bodyRef.current && !file) {
+        Alert.alert('Post', "please choose an image or add post body");
+        return;
+       }
+
+       let data = {
+        file,
+        body: bodyRef.current,
+        userId : user?.id,
+
+        
+       }
+
+
+       // Create post
   }
 
   console.log('file uri: ', getFileUri(file));
