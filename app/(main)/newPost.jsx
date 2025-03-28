@@ -13,6 +13,7 @@ import Icon from '../../assets/icons'
 import * as ImagePicker from 'expo-image-picker';
 import { getSupabaseFilUrl } from '../../services/imageService'
 import { Video } from 'expo-av'
+import { createOrUpdatePost } from '../../services/postService'
 
 
 
@@ -99,6 +100,11 @@ const NewPost = () => {
 
 
        // Create post
+
+       setLoading(true);
+       let res = await createOrUpdatePost(data);
+       setLoading(false);
+       console.log('post res: ', res);
   }
 
   console.log('file uri: ', getFileUri(file));
