@@ -1,4 +1,4 @@
-import { Button, ScrollView, StyleSheet, Text, TouchableOpacity, View,Image } from 'react-native'
+import { Button, ScrollView, StyleSheet, Text, TouchableOpacity, View,Image, Pressable } from 'react-native'
 import React, { useRef, useState } from 'react'
 import ScreenWrapper from '../../components/ScreenWrapper'
 import Header from '../../components/Header'
@@ -12,6 +12,7 @@ import { useRouter } from 'expo-router'
 import Icon from '../../assets/icons'
 import * as ImagePicker from 'expo-image-picker';
 import { getSupabaseFilUrl } from '../../services/imageService'
+import { Video } from 'expo-av'
 
 
 
@@ -83,7 +84,8 @@ const NewPost = () => {
      return getSupabaseFilUrl(file)?.uri; 
   }
   const onSubmit = async () => {
-
+      console.log('body: ', bodyRef.current)
+      console.log('file: ', file)
   }
 
   console.log('file uri: ', getFileUri(file));
@@ -128,12 +130,23 @@ const NewPost = () => {
             <View style={styles.file} > 
             {
               getFileType(file) == 'video'? (
-              <></>
+              <Video
+              style={{flex: 1}}
+              source= {{
+                uri: getFileUri(file)
+              }}
+              useNativeControls
+              resizeMode='cover'
+              isLooping
+              />
                  
               ) : (
               <Image source= {{uri: getFileUri(file)}}  resizeMode= 'cover' style={{flex: 1}} />
               )
             }
+            <Pressable style={styles.closeIcon} onPress={()=> setFile(null)}> 
+              <Icon name="delete" size= {20} color="white" />
+            </Pressable>
 
             </View>
           )
@@ -176,6 +189,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top:10,
     right: 10,
+    padding: 5,
+    borderRadius: 50,
+    backgroundColor: 'rgba(255,0,0,0.6)'
   },
   video : {
 
