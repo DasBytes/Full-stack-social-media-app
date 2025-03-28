@@ -1,4 +1,4 @@
-import { Button, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Button, ScrollView, StyleSheet, Text, TouchableOpacity, View,Image } from 'react-native'
 import React, { useRef, useState } from 'react'
 import ScreenWrapper from '../../components/ScreenWrapper'
 import Header from '../../components/Header'
@@ -11,7 +11,6 @@ import { useRoute } from '@react-navigation/native'
 import { useRouter } from 'expo-router'
 import Icon from '../../assets/icons'
 import * as ImagePicker from 'expo-image-picker';
-import Image from '../../assets/icons/Image'
 import { getSupabaseFilUrl } from '../../services/imageService'
 
 
@@ -56,10 +55,11 @@ const NewPost = () => {
 
       return false;
    }
+
   const getFileType = file => {
     if(!file)  return null;
     
-    if(!isLocalFile(file)) {
+    if(isLocalFile(file)) {
       return file.type;
 
     }
