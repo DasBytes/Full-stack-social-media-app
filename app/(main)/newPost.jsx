@@ -290,6 +290,14 @@ const styles = StyleSheet.create({
     textAlign : 'center',
     
   },
+  container: {
+          flex: 1,
+          paddingHorizontal: wp(4),
+          // backgroundColor: 'red'
+          marginBottom: 30,
+          gap: 15,
+
+      },
  
 
 })
