@@ -290,7 +290,7 @@ const styles = StyleSheet.create({
     textAlign : 'center',
     
   },
- container: {
+  container: {
           flex: 1,
           paddingHorizontal: wp(4),
           // backgroundColor: 'red'
@@ -298,5 +298,7 @@ const styles = StyleSheet.create({
           gap: 15,
 
       },
+  // New Container will be there
+ 
 
 })
