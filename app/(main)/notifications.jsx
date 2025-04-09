@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import ScreenWrapper from '../../components/ScreenWrapper'
 
 const Notifications = () => {
   return (
-    <View>
+    <ScreenWrapper>
       <Text>Notifications</Text>
-    </View>
+    </ScreenWrapper>
   )
 }
 

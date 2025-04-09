@@ -15,3 +15,5 @@ const ScreenWrapper = ({children, bg}) => {
 }
 
 export default ScreenWrapper
+
+
