@@ -8,6 +8,7 @@ import { useAuth } from '../../context/AuthContext';
 import { getUserImageSrc, uploadFile } from '../../services/imageService';
 import Icon from '../../assets/icons';
 import Input from '../../components/Input';
+
 import Button from '../../components/Button';
 import { updateUser } from '../../services/userService';
 import { useRouter } from 'expo-router';
@@ -81,7 +82,7 @@ const EditProfile = () => {
         setUserData({ ...currentUser, ...userData });
         router.back();
       }
-    };
+    }; 
     
    
     let imageSource = user.image && typeof user.image === 'object'

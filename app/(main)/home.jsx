@@ -23,7 +23,6 @@ const Home = () => {
     //    }
     // }
 
-
   return (
     <ScreenWrapper bg="white">
       <View  style={styles.container}>

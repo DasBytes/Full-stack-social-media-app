@@ -14,7 +14,6 @@ const Header = ({ title, showBackButton = true, mb = 10 }) => {
       showBackButton && (
         <View style={styles.BackButton}>
             <BackButton router ={router} />
-      
         </View>
       )
       }
