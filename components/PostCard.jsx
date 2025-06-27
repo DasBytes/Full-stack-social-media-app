@@ -12,12 +12,40 @@ import { theme } from "../constants/theme";
 import { hp, wp } from "../helpers/common";
 import { actions } from "react-native-pell-rich-editor";
 import Avatar from "./Avatar";
+import { ActivityIndicator } from "react-native";
 import moment from "moment";
 import Icon from "../assets/icons";
 import RenderHtml from "react-native-render-html";
 import { getSupabaseFileUrl } from "../services/imageService";
 import { Video } from "expo-av";
 import { createPostLike } from "../services/postService";
+import * as FileSystem from "expo-file-system";
+
+
+
+// Strip HTML tags from a string
+const stripHtmlTags = (html) => {
+  if (!html) return "";
+  return html.replace(/<[^>]*>?/gm, "").trim();
+};
+
+
+const downloadFile = async (url) => {
+  try {
+    const fileName = url.split('/').pop();
+    const localUri = FileSystem.documentDirectory + fileName;
+
+    const { uri } = await FileSystem.downloadAsync(url, localUri);
+    console.log('Downloaded to:', uri);
+
+    return uri;
+  } catch (error) {
+    console.error("File download failed:", error);
+    Alert.alert("Error", "Failed to download file.");
+    return url; // fallback
+  }
+};
+
 
 const textStyle = {
   color: theme.colors.dark,
@@ -177,14 +205,15 @@ const PostCard = ({ item, currentUser, router, hasShadow = true }) => {
           <Text style={styles.count}>{0}</Text>
         </View>
         <View style={styles.footerButton}>
-          {loading ? (
-            <Loading size="small" />
-          ) : (
-            <TouchableOpacity onPress={onShare}>
-              <Icon name="share" size={24} color={theme.colors.textLight} />
-            </TouchableOpacity>
-          )}
-        </View>
+  {loading ? (
+    <ActivityIndicator size="small" color={theme.colors.textLight} />
+  ) : (
+    <TouchableOpacity onPress={onShare}>
+      <Icon name="share" size={24} color={theme.colors.textLight} />
+    </TouchableOpacity>
+  )}
+</View>
+
       </View>
     </View>
   );
