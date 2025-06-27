@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "supa-social-app",
-    "slug": "supa-social-app",
+    "name": "full-stack-social-media-app",
+    "slug": "full-stack-social-media-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -36,6 +36,11 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "listUnknownPackages": false
+      }
     }
   }
 }
