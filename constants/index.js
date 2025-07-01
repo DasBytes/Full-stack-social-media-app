@@ -1,2 +1,2 @@
-export const superbaseUrl = 'https://pfyfqjlsosljwovjozxt.supabase.co';
-export const superbaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBmeWZxamxzb3Nsandvdmpvenh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIyODI5MTksImV4cCI6MjA1Nzg1ODkxOX0.wW2pnLjBFTKrqlBKLGzjtz-djKyEWP6WAmZeGhXFGDE';
+export const superbaseUrl = 'your superbase url';
+export const superbaseAnonKey = 'your superbase project key';
