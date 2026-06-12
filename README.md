@@ -1,50 +1,51 @@
-# Welcome to your Expo app 👋
+# 🚀 Full-Stack Social Media App (React Native)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?size=22&duration=3000&color=00C2FF&center=true&vCenter=true&width=600&lines=Social+Media+Mobile+App;Posts+%7C+Comments+%7C+Profiles;Real-Time+Updates;React+Native+Full+Stack" />
+</p>
 
-## Get started
+A full-stack **React Native social media application** with real-time features, media sharing, and rich user interaction powered by Supabase.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## ✨ Features
 
-2. Start the app
+- 📝 Create, edit, delete posts  
+- 💬 Comment system  
+- 👤 User profiles  
+- 🖼️ Media upload & sharing  
+- ⚡ Real-time updates (Supabase)  
+- 🎨 Rich text editor  
+- 📱 Mobile-first UI (Android/iOS)
 
-   ```bash
-    npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## 🛠 Tech Stack
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+**Frontend (Mobile App)**
+- React Native
+- Expo (if used)
+- Axios
+- Rich Text Editor
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+**Backend**
+- Node.js
+- Express.js
+- Supabase
+- PostgreSQL
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## 📦 Setup
 
 ```bash
-npm run reset-project
-```
+git clone https://github.com/DasBytes/Full-stack-social-media-app.git
+cd Full-stack-social-media-app
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+cd backend
+npm install
+npm run start-dev
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+cd frontend
+npm install
+npm run android   # or npm run ios
